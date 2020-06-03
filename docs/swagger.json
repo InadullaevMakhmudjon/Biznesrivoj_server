@@ -46,6 +46,10 @@
     {
       "name": "Bookmarks",
       "description": "Bookmarks endpoints"
+    },
+    {
+      "name": "Courses",
+      "description": "Courses endpoints"
     }
   ],
   "definitions": {
@@ -122,19 +126,19 @@
         "title_uz": {
           "type": "string"
         },
-        "title_ru": {
+        "title_kr": {
           "type": "string"
         },
         "body_uz": {
           "type": "string"
         },
-        "body_ru": {
+        "body_kr": {
           "type": "string"
         },
         "description_uz": {
           "type": "string"
         },
-        "description_ru": {
+        "description_kr": {
           "type": "string"
         },
         "categories": {
@@ -1297,6 +1301,28 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/courses": {
+      "get": {
+        "summary": "Courses endpoint",
+        "description": "Gets all articles. you can give `createdAt` param with values either ASC or DESC and pagination props limit and page. ex:/courses?createdAt=DESC",
+        "tags": [
+          "Courses"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All courses"
           }
         }
       }
