@@ -22,8 +22,9 @@ export default {
   delete(req, res) {
     Files.get(req).then(({ data }) => {
       const path = `./files/${data.url.split('/')[2]}`;
-      fs.unlink(path);
-      Files.delete(req).then(() => res.sendStatus(200)).catch(err=> res.status(502).json(err));
+      fs.unlink(path, () => {
+        Files.delete(req).then(() => res.sendStatus(200)).catch(err=> res.status(502).json(err))
+      });
     });
   },
 };
