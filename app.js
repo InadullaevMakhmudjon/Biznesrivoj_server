@@ -6,6 +6,7 @@ import routes from './routes';
 import swaggerDocs from './docs';
 import swaggerUI from 'swagger-ui-express';
 import fileUpload from 'express-fileupload';
+import cors from 'cors';
 import './config/passport';
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
 app.use(fileUpload({ limits: { fileSize: 50 * 1024 * 1024 } }));
 app.use('/files', express.static('files'));
 app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
