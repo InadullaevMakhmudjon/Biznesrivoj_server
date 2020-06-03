@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: process.env.MAIN_SERVICE_ENDPOINT || 'http://localhost:3040/api'
+    baseURL: process.env.MAIN_SERVICE_ENDPOINT || 'http://localhost:3040'
 });
 
 export const execute = (method, url, { body, query, }) => new Promise((res, rej) => {
-    let where = query ? Object.keys(query).map(key => `${key}=${query[key]}`).join('&') : '';
+    const where = query ? Object.keys(query).map(key => `${key}=${query[key]}`).join('&') : '';
     api({
         method,
         url: `${url}?${where}`,

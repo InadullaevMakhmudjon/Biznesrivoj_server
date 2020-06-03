@@ -1,5 +1,5 @@
 import API, { execute } from '.';
 
 export default {
-    hello: (req) => execute(API.GET, '/', req),
+  getAll: (req) => execute(API.GET, 'courses', req),
 }
