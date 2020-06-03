@@ -12,6 +12,6 @@ router.get('/:id/articles', passport.authenticate('jwt', { session: false }), ex
 router.get('/:id/bookmarks', passport.authenticate('jwt', { session: false }), executer(Users.bookmarks));
 router.post('/', passport.authenticate('jwt', { session: false }), executer(Users.create));
 router.post('/:id', passport.authenticate('jwt', { session: false }), executer(Users.update));
-router.delete('/:id', passport.authenticate('jwt', { session: false }), isNotUser, executer(Users.delete));
+router.delete('/:id', passport.authenticate('jwt', { session: false }), executer(Users.deleteUser));
 
 export default router;

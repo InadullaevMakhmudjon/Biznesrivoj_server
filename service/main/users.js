@@ -8,5 +8,5 @@ export default {
   bookmarks: ({ params: { id }, ...req })=> execute(API.GET, `users/${id}/bookmarks`, req),
   create: (req) => execute(API.POST,'users', req),
   update: ({ params: { id }, ...req }) => execute(API.POST, `users/${id}`, req),
-  delete: ({ params: { id }, ...req }) => execute(API.DELETE, `users/${id}`, req),
+  deleteUser: ({ params: { id }, ...req }) => execute(API.DELETE, `users/${id}`, req),
 }

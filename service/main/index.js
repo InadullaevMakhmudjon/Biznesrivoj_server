@@ -5,8 +5,7 @@ const api = axios.create({
 });
 
 export const execute = (method, url, { body, query, }) => new Promise((res, rej) => {
-    const where = query ? Object.keys(query).map(key => `${key}=${query[key]}`).join('&') : '';
-    
+    let where = query ? Object.keys(query).map(key => `${key}=${query[key]}`).join('&') : '';
     api({
         method,
         url: `${url}?${where}`,
