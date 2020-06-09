@@ -6,12 +6,18 @@ const api = axios.create({
 
 export const execute = (method, url, { body, query, }) => new Promise((res, rej) => {
     const where = query ? Object.keys(query).map(key => `${key}=${query[key]}`).join('&') : '';
+    console.log('-----------------------------------------------------')
+    console.log(`${url}?${where}`)
+    console.log('-----------------------------------------------------')
     api({
         method,
         url: `${url}?${where}`,
         data: body
     })
-    .then((resp) => {res({ data: resp.data, status: resp.status });}).catch(rej)
+    .then((resp) => {
+        console.log('GOOOOOOOOOOOOOOOOOOOOOOOOODDDDDDDDDDDDd');
+        res({ data: resp.data, status: resp.status });
+    }).catch(rej)
 });
 
 export default {

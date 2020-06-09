@@ -1,7 +1,7 @@
 const executer = (promise) => (req, res) => {
       promise(req)
       .then(({data, status}) => res.status(status).json(data))
-      .catch(({ response: resp }) => res.status(resp ? resp.status: 502).json(resp ? resp.data : { message: 'Error' }))
+      .catch(({ response }) => res.status(response.status).json(response.data))
 }
 
 const validate = (roleId) => (req, res, next) => {
