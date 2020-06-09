@@ -393,6 +393,36 @@
         }
       }
     },
+    "/api/users/exists": {
+      "post": {
+        "summary": "Checks user exists by phone number",
+        "description": "Checks the user whether exist, if exist you get 200 status code, if doesn't exist then 204 status code",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "phone",
+            "required": true,
+            "type": "string",
+            "description": "phone number without '+' sign."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/users/{id}": {
       "get": {
         "summary": "A user endpoint",
