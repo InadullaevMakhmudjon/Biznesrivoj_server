@@ -50,6 +50,10 @@
     {
       "name": "Courses",
       "description": "Courses endpoints"
+    },
+    {
+      "name": "Telegram",
+      "description": "Telegram bot endpoints"
     }
   ],
   "definitions": {
@@ -193,6 +197,63 @@
           "example": "+998123456789"
         },
         "code": {
+          "type": "string"
+        }
+      }
+    },
+    "BookCreate": {
+      "type": "object",
+      "properties": {
+        "title_kr": {
+          "type": "string"
+        },
+        "title_ru": {
+          "type": "string"
+        },
+        "description_kr": {
+          "type": "string"
+        },
+        "description_ru": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      }
+    },
+    "BookImage": {
+      "type": "object",
+      "properties": {
+        "bookId": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "GiftCreate": {
+      "type": "object",
+      "properties": {
+        "title_kr": {
+          "type": "string"
+        },
+        "title_ru": {
+          "type": "string"
+        },
+        "description_kr": {
+          "type": "string"
+        },
+        "description_ru": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "bonus": {
+          "type": "number"
+        },
+        "deadline": {
           "type": "string"
         }
       }
@@ -1353,6 +1414,167 @@
         "responses": {
           "200": {
             "description": "All courses"
+          }
+        }
+      }
+    },
+    "/api/telegram/users": {
+      "get": {
+        "summary": "Get telegram users endpoint",
+        "description": "Gets all telegram useres",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/gifts": {
+      "get": {
+        "summary": "Get gofts endpoint",
+        "description": "Gets all gifts",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "summary": "Gift create endpoint",
+        "description": "Creates a gift",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "Returns 201 status if is created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GiftCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/books": {
+      "get": {
+        "summary": "Get books endpoint",
+        "description": "Gets all books",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "summary": "Book create endpoint",
+        "description": "Creates a book",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "Returns 201 status if is created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/books/image": {
+      "post": {
+        "summary": "Append image book endpoint",
+        "description": "Appends a image to the book",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "Returns 201 status if is created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookImage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
