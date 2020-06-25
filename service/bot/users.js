@@ -1,5 +1,6 @@
 import API, { execute } from '.';
 
 export default {
-  getAll: (req) => execute(API.GET, 'users', req)
+  getAll: (req) => execute(API.GET, 'users', req),
+  get: (req) => execute(API.GET, `users/${req.params.id}`, req),
 }
