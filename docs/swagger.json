@@ -218,16 +218,25 @@
         },
         "price": {
           "type": "number"
+        },
+        "point": {
+          "type": "integer"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
-    "BookImage": {
+    "BookUpdate": {
       "type": "object",
       "properties": {
-        "bookId": {
-          "type": "integer"
+        "title_kr": {
+          "type": "string"
         },
-        "url": {
+        "title_ru": {
           "type": "string"
         }
       }
@@ -254,6 +263,17 @@
           "type": "number"
         },
         "deadline": {
+          "type": "string"
+        }
+      }
+    },
+    "GiftUpdate": {
+      "type": "object",
+      "properties": {
+        "title_kr": {
+          "type": "string"
+        },
+        "title_ru": {
           "type": "string"
         }
       }
@@ -1441,9 +1461,40 @@
         }
       }
     },
+    "/api/telegram/users/{id}": {
+      "get": {
+        "summary": "A User endpoint",
+        "description": "Gets a user",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the user to get",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/telegram/gifts": {
       "get": {
-        "summary": "Get gofts endpoint",
+        "summary": "Get gifts endpoint",
         "description": "Gets all gifts",
         "tags": [
           "Telegram"
@@ -1485,6 +1536,106 @@
             "schema": {
               "$ref": "#/definitions/GiftCreate"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/gifts/{id}": {
+      "get": {
+        "summary": "A Gift endpoint",
+        "description": "Gets a gift",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the gift to get",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "summary": "Gift update endpoint",
+        "description": "Updates the gift",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the Gift to update",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "You can send as many book props as you want to update at the same time",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GiftUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/gifts/afford/{point}": {
+      "get": {
+        "summary": "Affordable Gifts endpoint",
+        "description": "Gets all affordable gifts by given point",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "point",
+            "description": "Point that gets less pointed gifts",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
           }
         ],
         "responses": {
@@ -1547,6 +1698,75 @@
         }
       }
     },
+    "/api/telegram/books/{id}": {
+      "get": {
+        "summary": "A Book endpoint",
+        "description": "Gets a book",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the book to get",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "summary": "Book update endpoint",
+        "description": "Updates the book",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the user to update",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "You can send as many book props as you want to update at the same time",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BookUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/telegram/books/image": {
       "post": {
         "summary": "Append image book endpoint",
@@ -1570,6 +1790,60 @@
             "schema": {
               "$ref": "#/definitions/BookImage"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/orders": {
+      "get": {
+        "summary": "Get orders endpoint",
+        "description": "Gets all orders",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/orders/{id}": {
+      "get": {
+        "summary": "An Order endpoint",
+        "description": "Gets an order",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the gift to get",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
           }
         ],
         "responses": {
