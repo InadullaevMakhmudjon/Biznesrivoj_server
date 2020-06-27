@@ -12,7 +12,7 @@ export default {
       file.mv(`./files/${filename}`, (err) => {
         if (err) { res.status(500).json(err); console.log(err) } else {
             req.body = { url: `${BASE_URL}/files/${filename}` }
-            Files.create(req).then(() => res.status(201).json({url: `${BASE_URL}/files/${filename}`})).catch(err=>res.status(502).json(err))
+            Files.create(req).then(() => res.status(201).json({url: `https://${BASE_URL}/files/${filename}`})).catch(err=>res.status(502).json(err))
         }
       });
     } else {
