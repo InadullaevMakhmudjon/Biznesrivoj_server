@@ -207,13 +207,13 @@
         "title_kr": {
           "type": "string"
         },
-        "title_ru": {
+        "title_lat": {
           "type": "string"
         },
         "description_kr": {
           "type": "string"
         },
-        "description_ru": {
+        "description_lat": {
           "type": "string"
         },
         "price": {
@@ -236,7 +236,7 @@
         "title_kr": {
           "type": "string"
         },
-        "title_ru": {
+        "title_lat": {
           "type": "string"
         }
       }
@@ -247,13 +247,13 @@
         "title_kr": {
           "type": "string"
         },
-        "title_ru": {
+        "title_lat": {
           "type": "string"
         },
         "description_kr": {
           "type": "string"
         },
-        "description_ru": {
+        "description_lat": {
           "type": "string"
         },
         "image": {
@@ -273,8 +273,27 @@
         "title_kr": {
           "type": "string"
         },
-        "title_ru": {
+        "title_lat": {
           "type": "string"
+        }
+      }
+    },
+    "SendMessage": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "number"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "DeliveryPriceUpdate": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number"
         }
       }
     }
@@ -1492,6 +1511,37 @@
         }
       }
     },
+    "/api/telegram/users/{id}/getGifts": {
+      "get": {
+        "summary": "A User's gifts endpoint",
+        "description": "Gets all gifts belong to the user",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the user to get all gifts belong",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/telegram/gifts": {
       "get": {
         "summary": "Get gifts endpoint",
@@ -1767,38 +1817,6 @@
         }
       }
     },
-    "/api/telegram/books/image": {
-      "post": {
-        "summary": "Append image book endpoint",
-        "description": "Appends a image to the book",
-        "tags": [
-          "Telegram"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "type": "string",
-            "name": "Authorization",
-            "description": "Header",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "Body",
-            "description": "Returns 201 status if is created",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BookImage"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/telegram/orders": {
       "get": {
         "summary": "Get orders endpoint",
@@ -1840,10 +1858,167 @@
           {
             "in": "path",
             "name": "id",
-            "description": "Id of the gift to get",
+            "description": "Id of the order to get",
             "required": true,
             "type": "integer",
             "format": "base64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/orders/{id}/waiting": {
+      "post": {
+        "summary": "Order update endpoint",
+        "description": "Updates an order status to waiting",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the order to update",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/orders/{id}/done": {
+      "post": {
+        "summary": "An Order endpoint",
+        "description": "Updates an order status to done",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the order to update",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/deliveryTypes": {
+      "get": {
+        "summary": "Get all delivery types endpoint",
+        "description": "Gets all delivery types",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/deliveryTypes/{id}": {
+      "post": {
+        "summary": "A delivery price update endpoint",
+        "description": "Updates the deliver price",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the order to update",
+            "required": true,
+            "type": "integer",
+            "format": "base64"
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "Returns 200 status if is updates",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeliveryPriceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/telegram/bot/sendMessage": {
+      "post": {
+        "summary": "Sends message endpoint",
+        "description": "Sends message to the user",
+        "tags": [
+          "Telegram"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "type": "string",
+            "name": "Authorization",
+            "description": "Header",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "description": "Returns 201 status if is sent",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendMessage"
+            }
           }
         ],
         "responses": {
