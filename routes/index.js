@@ -11,6 +11,8 @@ import botBooks from './bot-books';
 import botGifts from './bot-gifts';
 import botUsers from './bot-users';
 import botOrders from './bot-orders';
+import botDelivery from './bot-delivery';
+import Bot from './bot';
 
 export default (app) => {
   app.use('/api/auth', auth);
@@ -26,4 +28,6 @@ export default (app) => {
   app.use('/api/telegram/gifts', botGifts);
   app.use('/api/telegram/users', botUsers);
   app.use('/api/telegram/orders', botOrders);
+  app.use('/api/telegram/deliveryTypes', botDelivery);
+  app.use('/api/telegram/bot', Bot);
 };
