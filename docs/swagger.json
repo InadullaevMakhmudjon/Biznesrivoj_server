@@ -222,6 +222,10 @@
         "point": {
           "type": "integer"
         },
+        "deliveryTypeId": {
+          "type": "number",
+          "description": "1 for free delivery and 2 for paid delivery type."
+        },
         "images": {
           "type": "array",
           "items": {
