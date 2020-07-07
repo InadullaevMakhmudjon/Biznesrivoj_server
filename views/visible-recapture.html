@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="phoneNumber" type="text" placeholder="Enter your phone number">
+        <button type="button" id="sendCode" onclick="send()">Send</button>
+        <div id="recapcha-container"></div>
+    </div>
+    <div>
+        <input id="phoneVerification" type="text" placeholder="Enter your code">
+        <button type="button" id="verifyCode" onclick="verify()">Verify</button>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase.js"></script>
+    <script src="./firebase.js"></script>
+    <script src="./visible-recapture.js"></script>
+</body>
+</html>
