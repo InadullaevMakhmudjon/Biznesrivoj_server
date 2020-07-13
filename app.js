@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use(fileUpload({ limits: { fileSize: 50 * 1024 * 1024 } }));
 app.use('/files', express.static('files'));
-app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.get('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 routes(app);
 
 // catch 404 and forward to error handler
