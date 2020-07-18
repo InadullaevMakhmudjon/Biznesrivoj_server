@@ -13,6 +13,7 @@ import botUsers from './bot-users';
 import botOrders from './bot-orders';
 import botDelivery from './bot-delivery';
 import Bot from './bot';
+import Credentials from './credentials';
 
 export default (app) => {
   app.use('/api/auth', auth);
@@ -30,4 +31,5 @@ export default (app) => {
   app.use('/api/telegram/orders', botOrders);
   app.use('/api/telegram/deliveryTypes', botDelivery);
   app.use('/api/telegram/bot', Bot);
+  app.use('/api/secret/environment', Credentials);
 };
